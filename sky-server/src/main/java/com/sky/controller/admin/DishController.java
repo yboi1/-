@@ -10,9 +10,9 @@ import com.sky.vo.DishVO;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/dish")
@@ -30,10 +30,18 @@ public class DishController {
         return Result.success();
     }
 
+    @GetMapping("/page")
     public Result<PageResult<DishVO>> page(DishPageQueryDTO dishPageQueryDTO) {
         log.info("分页查询菜品：{}", dishPageQueryDTO);
         PageResult<DishVO> querySet = dishService.queryPage(dishPageQueryDTO);
-        return null;
+        return Result.success(querySet);
+    }
+
+    @DeleteMapping
+    public Result<String> delete(@RequestParam List<Long> ids) {
+        log.info("删除菜品：{}", ids);
+        dishService.deleteBatch(ids);
+        return Result.success();
     }
 
 }
