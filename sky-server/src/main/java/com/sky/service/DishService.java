@@ -11,7 +11,9 @@ import java.util.List;
 public interface DishService {
     public void saveWithFlavor(DishDTO dishDTO);
 
-    PageResult<DishVO> queryPage(DishPageQueryDTO dishPageQueryDTO);
+    public PageResult<DishVO> queryPage(DishPageQueryDTO dishPageQueryDTO);
 
-    void deleteBatch(List<Long> ids);
+    public void deleteBatch(List<Long> ids);
+
+    public DishVO GetByIdWithFlavor(Long id);
 }

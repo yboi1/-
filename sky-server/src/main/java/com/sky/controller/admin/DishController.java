@@ -44,4 +44,11 @@ public class DishController {
         return Result.success();
     }
 
+    @GetMapping("/{id}")
+    public Result<DishVO> findById(@PathVariable Long id) {
+        log.info("查询菜品 by id={}", id);
+        DishVO dishVO = dishService.GetByIdWithFlavor(id);
+        return Result.success(dishVO);
+    }
+
 }
